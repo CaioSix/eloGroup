@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">          
           <a class="navbar-brand" href="/">
-                <img src={Logo} alt="" width="30" height="24" />
+                <img src={Logo} alt="" width="50" height="35" />
             </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -16,11 +16,11 @@ const Navbar = () => {
             <ul className="nav justify-content-center">
               
                 <li className="nav-item">
-                <a className="nav-link" href="/newuser">Cadastre-se</a>
+                <a className="nav-link" href="/register">Cadastre-se</a>
   
                 </li>
                 <li className="nav-item"> 
-                    <a className="nav-link" href="#">Login</a>
+                    <a className="nav-link" href="/login">Login</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link disabled">Sobre</a>
