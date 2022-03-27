@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ItemTabela = ({filme}) =>{
+const ItemTabela = ({emp}) =>{
     
     return(
         <tr>
-        <td>{filme.nome}</td>
+        <td>{emp.nome}</td>
         <td></td>
         <td></td>
         <td className="text-right">

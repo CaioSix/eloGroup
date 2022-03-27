@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Home.css'
 
 const Home = () => {
@@ -17,10 +17,10 @@ const Home = () => {
                     <h3>#UnlockYourPotential</h3>
                     </figcaption>
                     
-                    
-                    
+    
                     </div>
             </div>
+        
         </div>
   
     )

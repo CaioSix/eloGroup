@@ -1,29 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/log-escrito.jpg"
 import ItemTabela from "../../components/ModelDarshboard/index"
+import Modal from '../../components/AddLead/AddLead'
+
 
 const Dashbord = () =>{
-    const empresas =[
-        { nome : 'Telesena'},
+    const [modal, setModal] = useState(false)
+    
+    const [empresas, setEmpresas] = useState([ 
+        { nome : 'Bauduco'},
         { nome : 'Bradesco'},
         { nome : 'Itau'},
-        { nome : 'Unibanco'},
-        { nome : 'Faroeste Caboclo'},
-        { nome : 'quem me deraiai'},
-    ]
+    ])
+
+    const empresasNovas = JSON.parse(localStorage.getItem('novaEmpresa'));
+    // setEmpresas(empresasNovas)
+    empresas.push(empresasNovas)
+    // console.log(empresasNovas)
 
     return(
       <>
         <div className="container">
             <div className="row">
                 <div className="col">
-                <img src={Logo} alt="" width="" height="65" />
+                    <img src={Logo} alt="" width="" height="65" />
                 </div>
                 <div className="col">
                     Painel de leads
                 </div>
                 </div>
-                <button type="button" className="btn btn-info">Novo Lead (+)</button>
+                <button 
+                type="button" 
+                onClick={() => setModal(true)}
+                className="btn btn-info"
+                >Novo Lead (+)</button>
+                 {modal ? 
+                 <Modal onClose={ () => setModal(false)}>
+                         </Modal> 
+                     : null }
+           
         </div>
         <table className="table table-striped">
                     <thead>
@@ -35,9 +50,12 @@ const Dashbord = () =>{
                         </tr>
                     </thead>
                     <tbody>
-                        {empresas.map( filme => (<ItemTabela filme={filme} />))}
+                        {empresas.map( emp => (<ItemTabela emp={emp} />))}
+                        
                     </tbody>
                     </table>
+                 
+                  
       </>
 )}
 
