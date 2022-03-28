@@ -1,9 +1,6 @@
 import React from "react";
 import './Register.css'
 import { ErrorMessage, Formik, Form, Field } from 'formik';
-import * as yup from 'yup';
-import axios from 'axios';
-
 
 const Register = () => {
     const handleSubmit = values => console.log(values)
