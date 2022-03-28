@@ -1,9 +1,26 @@
 import React from "react";
 import './Register.css'
 import { ErrorMessage, Formik, Form, Field } from 'formik';
+// import HandleSubmit from "../../components/RegisterController/Register";
+
 
 const Register = () => {
-    const handleSubmit = values => console.log(values)
+    function handleSubmit(values) {
+        console.log(values)
+        let registros = [];
+        let storagedRegistros = localStorage.getItem("registros");
+
+        if (storagedRegistros) {
+            registros = JSON.parse(storagedRegistros);
+          }
+
+          registros.push(values);
+
+          localStorage.setItem("registros", JSON.stringify(registros));
+          alert('usuario foi criado')
+          
+    }
+  
     return(
         <div className="register-tela">
         <h1>Cadastre-se</h1>
@@ -65,7 +82,7 @@ const Register = () => {
                 <button 
                     className="register-btn" 
                     type="submit" 
-                >Login
+                >Registar
                 </button>
             </Form>
         </Formik>
