@@ -1,6 +1,6 @@
 import React from "react";
 
-const ItemTabela = ({ emp, index, updateStep }) => {
+const ItemTabela = ({ emp, index, updateStep, deleteBtn }) => {
   return (
     <tr>
       <td>{emp.step === "potencial" ? emp.nome : ""}</td>
@@ -14,7 +14,11 @@ const ItemTabela = ({ emp, index, updateStep }) => {
         >
           Avançar
         </button>
-        <button className="btn btn-danger">Finalizar</button>
+        {/* <button className="btn btn-danger"
+          onClick={()=> deleteBtn(index)
+          
+          }
+        >Finalizar</button> */}
       </td>
     </tr>
   );

@@ -26,6 +26,12 @@ const Dashbord = () => {
     setEmpresas(newEmpresas);
   };
 
+  const deleteBtn = (index) => {
+    localStorage.removeItem(index)
+   
+    alert('oi eu sou goku ')
+  }
+
   useEffect(() => {
     let storagedEmpresas = localStorage.getItem("empresas");
 
@@ -69,6 +75,7 @@ const Dashbord = () => {
             empresas.map((emp, index) => (
               <ItemTabela
                 updateStep={updateStep}
+                deleteBtn={deleteBtn}
                 key={emp.nome}
                 index={index}
                 emp={emp}

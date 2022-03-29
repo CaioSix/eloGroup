@@ -2,22 +2,36 @@ import React from 'react';
 import './Login.css'
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
-// import {handleSubmit} from './'
+
 
 const Login = () => {
     
     let dados = localStorage.getItem('registros');
+    
+    
     function handleSubmit (values) {
         
-        console.log(values.email)
-        console.log(dados)
-        console.log(dados.email)
-
-        dados.map( item => (
-            console.log(item)
-        ))
+        const dadoJson = JSON.parse(dados)
 
 
+        console.log(dadoJson);
+        dadoJson.forEach( (dado)=>{
+            console.log(dado.nome);
+            if(dado.email == values.email && dado.password == values.password ){
+                console.log('deu certin')
+                
+                
+                window.location.href = 'http://localhost:3000/dashbord';
+
+                
+            }else{
+                console.log('deu ruim ')
+            }
+        }
+
+        )
+        
+   
 
     }
     
@@ -52,6 +66,7 @@ const Login = () => {
                     <div className="login-group">
                         Senha
                         <Field 
+                            type="password"
                             name="password"
                             className="login-field"
                          />
