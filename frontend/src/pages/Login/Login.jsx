@@ -1,11 +1,13 @@
 import React from 'react';
 import './Login.css'
 import { ErrorMessage, Formik, Form, Field } from 'formik';
-import * as yup from 'yup';
+import * as yup from 'yup'; 
+import { useNavigate } from "react-router-dom"
 
 
 const Login = () => {
-    
+    const navigate = useNavigate();
+
     let dados = localStorage.getItem('registros');
     
     
@@ -19,9 +21,9 @@ const Login = () => {
             console.log(dado.nome);
             if(dado.email == values.email && dado.password == values.password ){
                 console.log('deu certin')
+                navigate('../dashbord', { replace: true })
                 
-                
-                window.location.href = 'http://localhost:3000/dashbord';
+             //   window.location.href = 'http://localhost:3000/dashbord';
 
                 
             }else{
