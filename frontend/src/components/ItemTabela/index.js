@@ -3,12 +3,13 @@ import React,{ useState, useEffect } from "react";
 const ItemTabela = () => {
   const [list,setList] = useState([["Internacional","",""],["LTDA","",""],["Muscp","",""]])
    
-  localStorage.setItem('empresas',JSON.stringify(list))
+  localStorage.setItem('lead',JSON.stringify(list))
     useEffect(() =>{
-      let dados = localStorage.getItem('empresas');
+      let dados = localStorage.getItem('empresasCopia');
       dados = JSON.parse(dados);
       if(dados!=null)
           setList(dados)
+          console.log(dados)
   },[])
 
   const [info,setInfo] = useState("")
@@ -19,6 +20,7 @@ const ItemTabela = () => {
           return false
       }
   }
+
 
   function allowDrop(ev) {
       ev.preventDefault();
@@ -32,9 +34,9 @@ const ItemTabela = () => {
     function drop(ev) {
       ev.preventDefault()
       let itens = info
-      let dados = localStorage.getItem('empresas');
-      dados = JSON.parse(dados);
-      let carata = dados
+      let dadosDrop = localStorage.getItem('empresas');
+      dadosDrop = JSON.parse(dadosDrop);
+      let carata = dadosDrop
       function findArray(array){
           let boolList = array.map(list => list.includes(itens))
           return boolList.findIndex(True)

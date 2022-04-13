@@ -8,7 +8,7 @@ const FormRegister = () =>{
         let registros = [];
         let storagedRegistros = localStorage.getItem("registros");
         if (storagedRegistros) {
-            registros = JSON.parse(storagedRegistros);
+            registros = JSON.parse(storagedRegistros); //verifica se é veradadeiro  ou nulo
           }
           registros.push(values);
           localStorage.setItem("registros", JSON.stringify(registros));
