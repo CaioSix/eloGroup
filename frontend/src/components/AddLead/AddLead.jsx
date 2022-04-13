@@ -15,8 +15,6 @@ const Modal = ({ onClose, children }) => {
       empresas = JSON.parse(storagedEmpresas);
     }
 
-    data.step = "potencial";
-
     empresas.push(data);
 
     localStorage.setItem("empresas", JSON.stringify(empresas));

@@ -1,36 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/log-escrito.jpg";
-import ItemTabela from "../../components/ModelDarshboard/index";
+import ItemTabela from "../../components/ItemTabela/index";
 import Modal from "../../components/AddLead/AddLead";
 
 const Dashbord = () => {
   const [modal, setModal] = useState(false);
   const [empresas, setEmpresas] = useState([]);
-
-  const updateStep = (index) => {
-    const newEmpresas = [...empresas];
-
-    switch (newEmpresas[index].step) {
-      case "potencial":
-        newEmpresas[index].step = "confirmado";
-        break;
-      case "confirmado":
-        newEmpresas[index].step = "agendado";
-        break;
-      default:
-        newEmpresas[index].step = "agendado";
-    }
-
-    localStorage.setItem("empresas", JSON.stringify(newEmpresas));
-
-    setEmpresas(newEmpresas);
-  };
-
-  const deleteBtn = (index) => {
-    localStorage.removeItem(index)
-   
-    alert('oi eu sou goku ')
-  }
 
   useEffect(() => {
     let storagedEmpresas = localStorage.getItem("empresas");
@@ -65,20 +40,13 @@ const Dashbord = () => {
             <th scope="col">Cliente em Potencial</th>
             <th scope="col">Dados Confirmados</th>
             <th scope="col">Reunião Agendada</th>
-            <th scope="col" className="text-right">
-              Ações
-            </th>
           </tr>
         </thead>
         <tbody>
           {empresas &&
-            empresas.map((emp, index) => (
+            empresas.map(( ) => (
               <ItemTabela
-                updateStep={updateStep}
-                deleteBtn={deleteBtn}
-                key={emp.nome}
-                index={index}
-                emp={emp}
+               
               />
             ))}
         </tbody>
