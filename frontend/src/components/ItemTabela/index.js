@@ -1,95 +1,89 @@
-import React,{ useState, useEffect } from "react";
+import React from "react";
 
-const ItemTabela = () => {
-  const [list,setList] = useState([["Internacional","",""],["LTDA","",""],["Muscp","",""]])
-   
-  localStorage.setItem('lead',JSON.stringify(list))
-    useEffect(() =>{
-      let dados = localStorage.getItem('empresasCopia');
-      dados = JSON.parse(dados);
-      if(dados!=null)
-          setList(dados)
-          console.log(dados)
-  },[])
-
-  const [info,setInfo] = useState("")
-  function True(element){
-      if(element){
-          return true
-      }else{
-          return false
-      }
+const ItemTabela = ({ empresa, setEmpresas }) => {
+  function allowDrop(event) {
+    event.preventDefault();
   }
 
+  function drag(event) {
+    localStorage.setItem("empresa", JSON.stringify(empresa));
+  }
 
-  function allowDrop(ev) {
-      ev.preventDefault();
+  function drop(event, dropEmpresa, coluna) {
+    event.preventDefault();
+
+    let storagedEmpresa = localStorage.getItem("empresa");
+    if (storagedEmpresa) {
+      storagedEmpresa = JSON.parse(storagedEmpresa);
     }
-    
-    function drag(ev) {
-      let valor = ev.target.innerText
-      setInfo(valor)
+
+    if (dropEmpresa.nome !== storagedEmpresa.nome) {
+      return;
     }
-    
-    function drop(ev) {
-      ev.preventDefault()
-      let itens = info
-      let dadosDrop = localStorage.getItem('empresas');
-      dadosDrop = JSON.parse(dadosDrop);
-      let carata = dadosDrop
-      function findArray(array){
-          let boolList = array.map(list => list.includes(itens))
-          return boolList.findIndex(True)
-          }
 
-      function findElement(element,list){
-          let contador = 0
-          for(let i=0; i < list.length; i++){
-              contador++
-              if(element === list[i])
-                  return contador - 1
-          }
-      }
-      let listaChange = list[findArray(carata)]
-      let indexElementChange = findElement(itens,listaChange)
-      let aux = listaChange[indexElementChange+1]
-      
-      if(indexElementChange !== 2){
-          
-          listaChange[indexElementChange + 1] = listaChange[indexElementChange]
-          listaChange[indexElementChange] = aux
+    if(dropEmpresa.step === 'potencial' && coluna !== 'confirmado') {
+        return
+    }
 
-          let index = findArray(carata)
-          if(index > -1){
-              carata.splice(index,1)
-          }
-          let listaTotal = [listaChange].concat(carata)
-          localStorage.setItem('copiaLead',JSON.stringify(listaTotal));
-          setList(listaTotal)
-          
-      }   
-      else{
-              alert("Movimento Bloqueado")
-      }      
+    if(dropEmpresa.step === 'confirmado' && coluna !== 'agendado') {
+        return
+    }
+
+    if(dropEmpresa.step === 'agendado') {
+        return
+    }
+
+    dropEmpresa.step = coluna;
+
+    let empresas = localStorage.getItem("empresas");
+
+    if (empresas) {
+      empresas = JSON.parse(empresas);
+      const novasEmpresas = empresas.map((empresa) => {
+        if (empresa.nome === dropEmpresa.nome) {
+          return dropEmpresa;
+        } else {
+          return empresa;
+        }
+      });
+
+      localStorage.setItem("empresas", JSON.stringify(novasEmpresas));
+
+      setEmpresas(novasEmpresas)
+    }
   }
 
   return (
- 
-        list.map(element =>{
-                   
-                    return(
-                        <tr >
-                            <th className="repeat" onDragStart={drag} draggable="true">{element[0]}</th>
-                            <th className="repeat" onDragStart={drag} onDrop={drop} onDragOver={allowDrop}draggable="true">{element[1]}</th>
-                            <th className="repeat" onDrop={drop} onDragOver={allowDrop} draggable="true">{element[2]}</th>
-                        </tr>
-                        )      
-                    }
-                )
-
-       
-   
-)
+    <tr>
+      <th
+        className="repeat"
+        onDragStart={drag}
+        onDrop={(event) => drop(event, empresa, "potencial")}
+        onDragOver={allowDrop}
+        draggable="true"
+      >
+        {empresa.step === "potencial" ? empresa.nome : ""}
+      </th>
+      <th
+        className="repeat"
+        onDragStart={drag}
+        onDrop={(event) => drop(event, empresa, "confirmado")}
+        onDragOver={allowDrop}
+        draggable="true"
+      >
+        {empresa.step === "confirmado" ? empresa.nome : ""}
+      </th>
+      <th
+        className="repeat"
+        onDragStart={drag}
+        onDrop={(event) => drop(event, empresa, "agendado")}
+        onDragOver={allowDrop}
+        draggable="true"
+      >
+        {empresa.step === "agendado" ? empresa.nome : ""}
+      </th>
+    </tr>
+  );
 };
 
 export default ItemTabela;

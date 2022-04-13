@@ -5,7 +5,7 @@ import NavBar from './components/Nav/NavBar.jsx'
 import Footer from './components/Footer/Footer'
 import Register from './pages/Register/Register.jsx'
 import Login from './pages/Login/Login.jsx'
-import Dashbord from './pages/Dashboard/Dashboard.jsx'
+import Dashboard from './pages/Dashboard/Dashboard.jsx'
 
 export default function App() {
     return(
@@ -17,7 +17,7 @@ export default function App() {
             <Route path="/" element={<Home/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
-            <Route path="/dashbord" element={<Dashbord/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
           </Routes>
         <Footer />
       </div>

@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/log-escrito.jpg";
-import ItemTabela from "../../components/ItemTabela/index";
 import Modal from "../../components/AddLead/AddLead";
+import TableLeads from "../../components/TableLeads/TableLeads";
 
 const Dashbord = () => {
   const [modal, setModal] = useState(false);
-  const [empresas, setEmpresas] = useState([]);
-
-  useEffect(() => {
-    let storagedEmpresas = localStorage.getItem("empresas");
-
-    if (storagedEmpresas) {
-      storagedEmpresas = JSON.parse(storagedEmpresas);
-      setEmpresas(storagedEmpresas);
-    }
-  }, [modal]);
 
   return (
     <>
@@ -34,25 +24,9 @@ const Dashbord = () => {
         </button>
       </div>
 
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Cliente em Potencial</th>
-            <th scope="col">Dados Confirmados</th>
-            <th scope="col">Reunião Agendada</th>
-          </tr>
-        </thead>
-        <tbody>
-          {empresas &&
-            empresas.map(( ) => (
-              <ItemTabela
-               
-              />
-            ))}
-        </tbody>
-      </table>
+      <TableLeads />
 
-      {modal ? <Modal onClose={() => setModal(false)}></Modal> : null}
+      {modal && <Modal onClose={() => setModal(false)}></Modal>}
     </>
   );
 };
